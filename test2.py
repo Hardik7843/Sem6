@@ -5,6 +5,7 @@ from cvzone.HandTrackingModule import HandDetector
 import numpy as np
 import math
 
+
 cap = cv2.VideoCapture(0)
 detector = HandDetector(maxHands=1)
 classeifier = Classifier("Model/keras_model.h5","Model/labels.txt")
@@ -12,7 +13,6 @@ classeifier = Classifier("Model/keras_model.h5","Model/labels.txt")
 offset = 20
 imgSize = 300
 
-folder ="Data/Y"
 counter = 0
 
 labels = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
@@ -45,7 +45,7 @@ while True:
             wGap = math.ceil((imgSize-wCal) /2)
             imgWhite[:, wGap:wCal+wGap] = imgResize
             prediction ,index = classeifier.getPrediction(imgWhite)
-            print(index,prediction)
+            # print(index,prediction)
 
 
 
@@ -57,13 +57,14 @@ while True:
             hGap = math.ceil((imgSize - hCal) / 2)
             imgWhite[hGap:hCal + hGap, :] = imgResize
             prediction , index = classeifier.getPrediction(imgWhite)
-            print(index,prediction)
+            # print(index,prediction)
 
-        cv2.putText(imgOutput,labels[index],(x,y-20),cv2.FONT_HERSHEY_SIMPLEX,2,(255,9,254),2)
-
-        cv2.imshow("ImageCrop", imgCrop)
-        cv2.imshow("WhiteImage", imgWhite)
+        # cv2.putText(imgOutput,labels[index],(x,y-20),cv2.FONT_HERSHEY_SIMPLEX,2,(255,9,254),2)
+        #
+        # cv2.imshow("ImageCrop", imgCrop)
+        # cv2.imshow("WhiteImage", imgWhite)
         var = str(labels[index])
+        # print(var)
 
     cv2.imshow("Keep your hands 1 feet away from camera", imgOutput)
     key = cv2.waitKey(1)
